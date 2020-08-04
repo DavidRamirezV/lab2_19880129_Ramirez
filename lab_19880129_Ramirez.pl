@@ -235,6 +235,14 @@ gitPull(RepoInput, RepoOutput):-
 
    crearRepo(NombreRepo,Autor,Fecha, R6,[],[],R,RepoOutput).
 
+
+/*
+ Predicado : gitStatus(RepoInput,RepoOutput).
+ Descripción: Funcion que muestra el status actual de index y
+              localrepository
+ Dominio : Repositorio (list)
+ Resultado  : String con informacion obtenida de Index y local Repository. */
+
 gitStatus(RepoInput,  RepoStatusStr):-
    nth0(4,RepoInput,I),
    is_list(I),
