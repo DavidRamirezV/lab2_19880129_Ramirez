@@ -116,7 +116,7 @@ gitCommit(RepoInput, Mensaje, RepoOutput):-
    string_concat('"', Mensaje, Cadena0 ),
    string_concat(Cadena0, '"', Mensaje1 ),
    L=[Mensaje1|[I]],
-   crearRepo(NombreRepo,Autor,Fecha, W,[],L,[],RepoOutput).
+   crearRepo(NombreRepo,Autor,Fecha, W,I,L,[],RepoOutput).
 
 
 /*
@@ -177,7 +177,7 @@ git2String(RepoInput, RepoAsString):-
    string_concat(Cadena9, "\nCommits en Local Repository:\n   ", Cadena10 ),
    atomics_to_string(L2,"\n   ",Local),
    string_concat(Cadena10, Local, Cadena11 ),
-   string_concat(Cadena11, "\nCommits en Remote Reposiory:\n   ", Cadena12 ),
+   string_concat(Cadena11, "\nCommits en Remote Repository:\n   ", Cadena12 ),
    atomics_to_string(R2,"\n   ",Remote),
    string_concat(Cadena12, Remote, Cadena13 ),
    string_concat(Cadena13,"\n\n##################################\n",RepoAsString).
@@ -235,8 +235,20 @@ gitPull(RepoInput, RepoOutput):-
 
    crearRepo(NombreRepo,Autor,Fecha, R6,[],[],R,RepoOutput).
 
+gitStatus(RepoInput,  RepoStatusStr):-
+   nth0(4,RepoInput,I),
+   is_list(I),
+   nth0(5,RepoInput,L),
+   is_list(L),
+   length(L,Largo),
+   N is Largo/2,
+   number_string(N,Nstring),
+   atomics_to_string(I,"\n   ",Index),
+   string_concat("\n##########Status##############\nArchivos agregados a Index:\n   " ,Index, Cadena1 ),
 
-
+   string_concat(Cadena1, "\nCantidad de commits en el Local Repository: ", Cadena2 ),
+   string_concat(Cadena2, Nstring, Cadena3 ),
+   string_concat(Cadena3, "\nRama actual Local Repository: master\n########################", RepoStatusStr ).
 
 
 /* Ejemplo Completo Actual
@@ -255,7 +267,7 @@ git2String(Rep4,Rep4str),
 git2String(Rep5,Rep5str),
 git2String(Rep6,Rep6str),
 
-write("\nCREAR REPOSITORIO\n"),
+write("\nCREAR REPOSITORIO\n")
 write(Rep1str),
 write("\ngit CREAR WORKSPACE\n"),
 write(Rep2str),
@@ -269,27 +281,6 @@ write("\ngit PULL\n"),
 write(Rep6str).
 
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
