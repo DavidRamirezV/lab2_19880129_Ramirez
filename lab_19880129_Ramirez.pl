@@ -261,7 +261,7 @@ gitStatus(RepoInput,  RepoStatusStr):-
 
 /* Ejemplo Completo Actual
 
-gitInit("Rep1","David Ramírez",Rep1),
+gitInit("Rep1","David Ramirez",Rep1),
 createWorkspace(Workspace),
 editZonas(Rep1,Workspace,[],[],[],Rep2),
 gitAdd(Rep2,["a1.txt","blablabla.jpg"],Rep3),
@@ -274,8 +274,8 @@ git2String(Rep3,Rep3str),
 git2String(Rep4,Rep4str),
 git2String(Rep5,Rep5str),
 git2String(Rep6,Rep6str),
-
-write("\nCREAR REPOSITORIO\n")
+gitStatus(Rep5,StatusStr),
+write("\nCREAR REPOSITORIO\n"),
 write(Rep1str),
 write("\ngit CREAR WORKSPACE\n"),
 write(Rep2str),
@@ -286,8 +286,8 @@ write(Rep4str),
 write("\ngit PUSH\n"),
 write(Rep5str),
 write("\ngit PULL\n"),
-write(Rep6str).
-
+write(Rep6str),
+write(StatusStr).
 */
 
 
